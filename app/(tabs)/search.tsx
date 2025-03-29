@@ -14,6 +14,7 @@ import useFetch from "@/services/useFetch";
 import { useRouter } from "expo-router";
 import { icons } from "@/constants/icons";
 import SearchBar from "@/components/SearchBar";
+import { updateSearchCount } from "@/services/appwrite";
 
 const search = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -27,7 +28,8 @@ const search = () => {
   } = useFetch(() => fetchMovies({ query: searchQuery },), false);
 
   useEffect(() => {
-    const func = async () => {
+
+ const func = async () => {
       if (searchQuery.trim()) {
         await loadmovies();
       } else {
@@ -41,6 +43,15 @@ const search = () => {
 
     return () => clearTimeout(timeOutId);
   }, [searchQuery]);
+
+useEffect(() => {
+  if(movies?.length > 0 && movies?.[0]) {
+     updateSearchCount(searchQuery, movies[0])
+  }
+}, [movies])
+
+
+
   return (
     <View className="flex-1 bg-primary">
       <Image

@@ -1,11 +1,16 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Image } from 'react-native'
 import React from 'react'
+import { icons } from '@/constants/icons'
 
 const save = () => {
   return (
-    <View>
-      <Text>save</Text>
-    </View>
+     <View className='bg-primary flex-1 px-10'>
+          
+            <View className='flex justify-center items-center flex-1 flex-col gap-5 '>
+              <Image source={icons.save} className="size-10" tintColor="#FFF" />
+              <Text className='text-gray-500 text-base'> Profile</Text>
+        </View>
+        </View>
   )
 }
 
